@@ -1,0 +1,22 @@
+python train.py \
+    --model_name_or_path google/mt5-small \
+    --do_train \
+    --do_eval \
+    --evaluation_strategy epoch \
+    --gradient_accumulation_steps 8 \
+    --train_file ./data/train.json \
+    --validation_file ./data/public.json \
+    --text_column maintext \
+    --learning_rate 1e-3 \
+    --num_train_epochs 5 \
+    --summary_column title \
+    --dataset_config "3.0.0" \
+    --source_prefix "summarize: " \
+    --output_dir ./model \
+    --per_device_train_batch_size=2 \
+    --save_strategy epoch \
+    --per_device_eval_batch_size=2 \
+    --overwrite_output_dir \
+    --optim adafactor \
+    --save_total_limit 1 \
+    --predict_with_generate
